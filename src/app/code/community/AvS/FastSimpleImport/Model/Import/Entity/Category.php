@@ -722,7 +722,9 @@ class AvS_FastSimpleImport_Model_Import_Entity_Category extends Mage_ImportExpor
     protected function _uploadMediaFiles($fileName)
     {
         try {
-            $res = $this->_getUploader()->move($fileName);
+            $uploader = $this->_getUploader();
+            $uploader->setAllowRenameFiles(false);
+            $res = $uploader->move($fileName);
             return $res['file'];
         } catch (Exception $e) {
             return '';
